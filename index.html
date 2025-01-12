@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backgammon Move Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        #imagePreview {
+            max-width: 100%;
+            margin-top: 20px;
+        }
+        #response {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        #fileInput, #cameraInput {
+            display: none;
+        }
+        .options {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .option {
+            margin: 10px 0;
+        }
+        .dice-input {
+            width: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Backgammon Move Analyzer</h1>
+    <p>Upload a picture of your backgammon board to get the next move.</p>
+    
+    <p><strong>Note: The black home is always at the bottom right.</strong></p>
+
+    <p>The points are numbered from 1 (bottom right) to 24 (top right)</p>
+    
+    <input type="file" id="fileInput" accept="image/*">
+    <input type="file" id="cameraInput" accept="image/*" capture="environment">
+    <button class="button" onclick="document.getElementById('fileInput').click()">Select from Gallery</button>
+    <button class="button" onclick="document.getElementById('cameraInput').click()">Take Picture</button>
+    
+    <div class="options">
+        <div class="option">
+            <label for="playerTurn">Player's Turn:</label>
+            <select id="playerTurn">
+                <option value="white">White</option>
+                <option value="black">Black</option>
+            </select>
+        </div>
+        <div class="option">
+            <label for="diceRoll1">Dice Roll:</label>
+            <input type="number" id="diceRoll1" class="dice-input" min="1" max="6" value="1">
+            <input type="number" id="diceRoll2" class="dice-input" min="1" max="6" value="1">
+        </div>
+    </div>
+    
+    <img id="imagePreview" style="display: none;" alt="Uploaded image preview">
+    
+    <button id="uploadButton" class="button" onclick="uploadData()">Upload and Analyze</button>
+    
+    <div id="response"></div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const cameraInput = document.getElementById('cameraInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const responseDiv = document.getElementById('response');
+        const playerTurnSelect = document.getElementById('playerTurn');
+        const diceRoll1Input = document.getElementById('diceRoll1');
+        const diceRoll2Input = document.getElementById('diceRoll2');
+        const uploadButton = document.getElementById('uploadButton');
+
+        function handleImageSelection(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagePreview.src = event.target.result;
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        fileInput.addEventListener('change', handleImageSelection);
+        cameraInput.addEventListener('change', handleImageSelection);
+
+        function uploadData() {
+            const file = fileInput.files[0] || cameraInput.files[0];
+            if (!file) {
+                responseDiv.textContent = 'Please select an image first.';
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('playerTurn', playerTurnSelect.value);
+            formData.append('diceRoll1', diceRoll1Input.value);
+            formData.append('diceRoll2', diceRoll2Input.value);
+
+            responseDiv.textContent = 'Uploading and analyzing image...';
+            
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    responseDiv.textContent = 'Error: ' + data.error;
+                } else {
+                    responseDiv.innerHTML = 'Suggested move:<br> ' + data.move.join('<br>');
+                }
+            })
+            .catch(error => {
+                responseDiv.textContent = 'Error uploading file: ' + error;
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>
