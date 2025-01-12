@@ -12,14 +12,18 @@ This project integrates GNU Backgammon, YOLOv5, and a Flask-based web applicatio
 
 ## Installation
 1.Python (3.8 or later)
+
 2.GNU Backgammon (gnubg)
+
 3.YOLOv5 dependencies
+
 4.Flask
+
 
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/backGamon-analyzer.git
+   git clone https://github.com/nitzankoll/backGammon-analyzer.git
    cd backGamon-analyzer
    ```
 
@@ -48,14 +52,22 @@ This project integrates GNU Backgammon, YOLOv5, and a Flask-based web applicatio
 
 ## File Structure
 /project_directory
+
 │
 ├── backGammon.py          # Handles backgammon-specific processing
+
 ├── server.py              # Flask web server
+
 ├── requirements.txt       # Python dependencies
+
 ├── .gitignore             # Git ignore file
+
 ├── README.md              # Project documentation
+
 ├── model.pt               # custom yolov5 model
+
 └── index.html             # HTML file for Flask
+
 
 ## Contributing
 Feel free to submit issues or contribute via pull requests.
