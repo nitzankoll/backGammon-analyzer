@@ -10,15 +10,6 @@ This project integrates GNU Backgammon, YOLOv5, and a Flask-based web applicatio
 - Board Detection: Use YOLOv5 to detect and normalize coordinates of checkers within each quarter of the backgammon board.
 - Web Interface: A Flask web application for interacting with the AI, uploading images, and retrieving board states.
 
-## Installation
-1.Python (3.8 or later)
-
-2.GNU Backgammon (gnubg)
-
-3.YOLOv5 dependencies
-
-4.Flask
-
 
 ## Installation
 1. Clone the repository:
@@ -48,24 +39,19 @@ This project integrates GNU Backgammon, YOLOv5, and a Flask-based web applicatio
    ![Server URL](images/url_example.png)
 
 3. Upload images of backgammon boards for analysis.
+	board detection example:
+	
    ![Detection board example](images/detection_example.png)
 
 ## File Structure
 /project_directory
-
 │
 ├── backGammon.py          # Handles backgammon-specific processing
-
 ├── server.py              # Flask web server
-
 ├── requirements.txt       # Python dependencies
-
 ├── .gitignore             # Git ignore file
-
 ├── README.md              # Project documentation
-
 ├── model.pt               # custom yolov5 model
-
 └── index.html             # HTML file for Flask
 
 
