@@ -38,21 +38,21 @@ This project integrates GNU Backgammon, YOLOv5, and a Flask-based web applicatio
 	1. if you want to run on your locall network see the server.py print for the url.
    ![Server URL](images/url_example.png)
 
-3. Upload images of backgammon boards for analysis.
+3. Upload images of backgammon boards for analysis.  
 	board detection example:
 	
    ![Detection board example](images/detection_example.png)
 
 ## File Structure
 /project_directory
-│
-├── backGammon.py          # Handles backgammon-specific processing
-├── server.py              # Flask web server
-├── requirements.txt       # Python dependencies
-├── .gitignore             # Git ignore file
-├── README.md              # Project documentation
-├── model.pt               # custom yolov5 model
-└── index.html             # HTML file for Flask
+│  
+├── backGammon.py          # Handles backgammon-specific processing  
+├── server.py              # Flask web server  
+├── requirements.txt       # Python dependencies  
+├── .gitignore             # Git ignore file  
+├── README.md              # Project documentation  
+├── model.pt               # custom yolov5 model  
+└── index.html             # HTML file for Flask  
 
 
 ## Contributing
