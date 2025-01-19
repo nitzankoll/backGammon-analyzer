@@ -4,6 +4,7 @@
 
 ## Description
 This project integrates GNU Backgammon, YOLOv5, and a Flask-based web application to analyze, detect, and process backgammon board states and improve gameplay insights. The project uses machine learning and computer vision to detect board states and compute accurate positions for backgammon pieces.
+You can read more about the project in my [Medium story](https://medium.com/@nitzankolatacz/fb541ec1c0e5).
 
 ## Features
 - Backgammon State Analysis: Set up the board state and perform analyses using GNU Backgammon.
